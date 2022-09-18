@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculator</title>
+	<link rel="stylesheet" href="./node_modules/mdb-ui-kit/css/mdb.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="col-5">
+			<div class="card">
+				<div class="card-body">
+					<form action="" id="calcuform">
+						<div class="">
+							<label for="" class=" ">First Number</label>
+							<input type="number" id="firstnum" class="form-control" placeholder="Enter First Number">
+							<small class="text-danger" id="firstnumError">First Number Required</small>
+						</div>
+						<div class=" mt-3">
+							<label for="" class=" ">Second Number</label>
+							<input type="number" id="secnum" class="form-control" placeholder="Enter First Number">
+							<small class="text-danger" id="secnumError">Second Number Required</small>
+						</div>
+						<div class=" form-group mt-3">
+							<label for="">Select Operator</label>
+							<select name="" id="operator" class=" form-control">
+								<option value="empty">Choose Operator</option>
+								<option value="add">+</option>
+								<option value="minus">-</option>
+								<option value="multiply">*</option>
+								<option value="division">/</option>
+							</select>
+							<small class="text-danger" id="operaError">Operator Required</small>
+						</div>
+						<div class=" mt-3">
+							<button class=" btn btn-dark " type="button" id="btncalcu" onclick="calculate()">Calculate</button>
+							<button class=" btn btn-danger " type="button" id="btnclear" onclick="cle()">Clear</button>
+						</div>
+					</form>
+				</div>
+				<div class="card-footer">
+					<label for="">Result</label>
+					<h3 id="result"></h3>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		let Result=document.querySelector("#result")
+		let form=document.querySelector("#calcuform");
+		let firstNumError=document.querySelector("#firstnumError");
+		let secNumError=document.querySelector("#secnumError");
+		let operaError=document.querySelector("#operaError");
+		firstNumError.style.display= "none";
+		secNumError.style.display= "none";
+		operaError.style.display= "none";
+		
+
+		function calculate(){
+			let num1=document.querySelector("#firstnum").value;
+			let num2=document.querySelector("#secnum").value;
+			let operator=document.querySelector("#operator").value;
+			let output;
+			var status=true;
+			if(num1==""|| num1==null){
+				firstNumError.style.display="block";
+				status=false;
+			}else{
+				firstNumError.style.display="none";
+				status=true;
+			}
+			if(num2==""|| num2==null){
+				secNumError.style.display="block";
+				status=false;
+			}else{
+				secNumError.style.display="none";
+				status=true;
+			}
+			if(operator=="empty"){
+				operaError.style.display="block";
+				status=false;
+			}else{
+				operaError.style.display="none";
+				status=true;
+			}
+			if(status==true){
+				parseNum1=parseInt(num1);
+			parseNum2=parseInt(num2);
+			switch(operator){
+				case 'add' :output =parseNum1+parseNum2;
+				break;
+				case 'minus':
+				if(parseNum1>parseNum2){
+				 output =parseNum1-parseNum2;
+				}else{
+					output =parseNum2-parseNum1;
+				}
+				break;
+				case 'multiply' :output =parseNum1*parseNum2;
+				break;
+				case 'division' :output =parseNum1/parseNum2;
+				break;
+			}
+			result.innerHTML=output;
+			}
+			
+		}
+		function cle(){
+			form.reset();
+			firstNumError.style.display="none";
+			secNumError.style.display="none";
+			operaError.style.display="none";
+			Result.innerHTML="";
+
+		}
+
+	</script>
+	<script src="./node_modules/mdb-ui-kit/js/mdb.min.js"></script>
+</body>
+</html>
